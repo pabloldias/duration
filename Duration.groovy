@@ -19,11 +19,11 @@ def getFileDuration(file) {
 
 def getExtension(file) {
     def extension = file.name.lastIndexOf('.').with {it != -1 ? file.name[it..<file.name.length()] : "-"}
-    extension
+    extension.toLowerCase()
 }
 
 def isVideo(file) {
-    getExtension(file) in ['.mp4']
+    getExtension(file) in ['.mp4', '.m4v', '.flv', '.mov', '.avi', '.mpg', '.wmv']
 }
 
 def formatTime(millis) {
@@ -42,7 +42,11 @@ def getCourseDuration(course) {
             duration += getFileDuration(file) 
         }    
     }
-    formatTime(duration * 1000)
+    if (duration > 0.0) {
+        formatTime(duration * 1000)
+    } else {
+        '00:00:00'
+    }
 }
 
 def getFiles(dir) {   
@@ -68,5 +72,5 @@ def writeJsonFile(files) {
     }    
 }
 
-def dir = new File("C:\\Users\\Pablo\\Downloads\\cursos")
+def dir = new File("G:\\cursos")
 writeJsonFile(getFiles(dir))
