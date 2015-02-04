@@ -26,6 +26,15 @@ def isVideo(file) {
     getExtension(file) in ['.mp4']
 }
 
+def formatTime(millis) {
+    def second = (millis / 1000) % 60;
+    def minute = (millis / (1000 * 60)) % 60;
+    def hour = (millis / (1000 * 60 * 60)) % 24;
+
+    def time = String.format("%02d:%02d:%02d", hour.intValue(), minute.intValue(), second.intValue());
+    time
+}
+
 def getCourseDuration(course) {
     def duration = 0.0
     course.eachFileRecurse (FileType.FILES) { 
@@ -33,9 +42,7 @@ def getCourseDuration(course) {
             duration += getFileDuration(file) 
         }    
     }
-    def timeDuration = Calendar.instance
-    timeDuration.setTimeInMillis((duration * 1000).intValue())
-    timeDuration
+    formatTime(duration * 1000)
 }
 
 def getFiles(dir) {   
