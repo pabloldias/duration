@@ -23,7 +23,7 @@ def getExtension(file) {
 }
 
 def isVideo(file) {
-    getExtension(file) in ['.mp4', '.m4v', '.flv', '.mov', '.avi', '.mpg', '.wmv']
+    getExtension(file) in ['.mp4', '.m4v', '.flv', '.mov', '.avi', '.mpg', '.wmv', '.f4v']
 }
 
 def formatTime(millis) {
